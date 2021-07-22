@@ -21,13 +21,8 @@ void setup(){
 void loop()
 {
   
-  
-  int gas = analogRead(gasSensorPin);
-  
-  gas = map(gas, 300, 750, 0, 100);
-  //Serial.print("Smog Levels: ");
-  //Serial.println(gas);
-  checkGas(gas);
+ 
+  checkGas();
   
   checkCarPass();
   
@@ -37,7 +32,9 @@ void loop()
   
 }
 
-void checkGas(int value){
+void checkGas(){
+  int value = getAirQuality();
+  
   if(value > 80){
   	tone(gasPiezo, 460); // play tone 59 (B4 = 494 Hz)
     delay(1000);
