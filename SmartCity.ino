@@ -9,13 +9,7 @@ int YELLOW_LED = 6;
 int RED_LED = 7;
 
 //#################### STATS VARIABLES #############
-int hours = 0;
-int minutes = 0;
-int seconds = 0;
-
-int previousSeconds = 0;
-int previousMinutes = 0;
-int previousHours = 0;
+long passedCars = 0;
 
 
 
@@ -35,10 +29,10 @@ void loop()
   //Serial.println(gas);
   checkGas(gas);
   
+  checkCarPass();
   
   
   
-  writeLog("test");
   delay(250);
   
 }
@@ -65,51 +59,14 @@ void checkCarPass(){
   		it means that a car has passed.
   */
   if(carSensor > 0){
-  	
+    passedCars +=1;
+  	writeLog("A car passed");
   }
 }
 
 
 
 //########################## UTILS #########################
-
-void checkTime(){
-  int localSeconds = millis()/1000 ;
-  int localMinutes = ( millis()/1000 ) / 60;
-  int localHours = ( ( millis()/1000 ) / 60 ) / 60;
-  
-  if(previousSeconds != localSeconds){
-    previousSeconds = localSeconds;
-  	seconds+=1;
-    if(seconds >= 60){
-    	seconds = 0;
-    }
-  }
-  
-  if(previousMinutes != localMinutes){
-    previousMinutes = localMinutes;
-  	minutes+=1;
-    if(minutes >= 60){
-    	minutes = 0;
-    }
-  }
-  
-  if(previousHours != localHours){
-    previousHours = localHours;
-  	hours+=1;
-    if(hours == 24){
-    	hours = 0;
-    }
-  }
-}
-
-void printTime(){
-  Serial.print(hours);
-  Serial.print(":");
-  Serial.print(minutes);
-  Serial.print(":");
-  Serial.print(seconds);
-}
 
 
 /**
@@ -124,7 +81,8 @@ String writeLog(String action){
   Serial.print("\"; \"Action\" : \"");
   Serial.print(action);
   
-  Serial.println("\"");
+  
+  Serial.println("\"}");
 }
 
 
