@@ -41,3 +41,14 @@ Anyway,  the first **sensor** is connected to the `Controller` (arduino) to know
 We need this **feature** to **LOG** the event:
 
 ![car pass](https://github.com/follen99/SmartCity/blob/main/Screenshots/carPass.png) 
+
+---
+
+### LOGS
+Whenever a car passes by, it's identified as an **event**, and a `Logger` saves it.
+We should save events (`logs`) to a **file** or a **database**,  but `TinkerCad` does not have this function yet. 
+We instead simply print to a console the **log** in a **json** form:
+![logs](https://github.com/follen99/SmartCity/blob/main/Screenshots/log.png)
+
+We can see how the **log** will be writed: 
+![enter image description here](https://github.com/follen99/SmartCity/blob/main/Screenshots/log_example.png)
