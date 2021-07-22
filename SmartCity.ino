@@ -49,12 +49,6 @@ void checkGas(){
 
 void checkCarPass(){
   int carSensor = analogRead(A2);
-  //Serial.print("Sensor: ");
-  //Serial.println(sensor);
-  
-  /** 	if the value is greater than 0
-  		it means that a car has passed.
-  */
   if(carSensor > 0){
     if(millis() - lastLog > LOG_INTERVAL){
   		lastLog = millis();
@@ -62,7 +56,6 @@ void checkCarPass(){
         passedCars +=1;
       	writeLog("A car passed");
     }
-    
   }
 }
 
