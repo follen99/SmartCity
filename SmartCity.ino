@@ -25,6 +25,9 @@ void loop()
   checkGas(gas);
   
   
+  Serial.println(getMinutes());
+  
+  
   delay(250);
   
 }
@@ -54,3 +57,27 @@ void checkCarPass(){
   	
   }
 }
+
+
+
+//########################## UTILS ##########################
+int getHours(){
+  String hours = hours + __TIME__[0] + __TIME__[1];
+  return hours.toInt();
+}
+
+int getMinutes(){
+  String hours = hours + __TIME__[3] + __TIME__[4];
+  return hours.toInt();
+}
+
+int getSeconds(){
+  String hours = hours + __TIME__[6] + __TIME__[7];
+  return hours.toInt();
+}
+
+
+
+
+
+
