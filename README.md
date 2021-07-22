@@ -10,7 +10,8 @@ A smart city goes beyond the use of digital technologies for **better resource**
 As we can see from the **Smart City** definition, the main goal is to have a **safer** and **cleaner** city.
 A way to achieve that is by monitoring the `CO2` in the air and using `using less resources`, turning lights down when we do not need them or limiting car traffic when the `CO2` levels are too high.
 
----
 A really important factor is to `understand` **when** and **why** some levels are too high, so a method to fix too high `CO2` values is by **logging** whenever there is an event, to **analyze** the data later.
 
 ## The Code
+We can **monitor** the **air quality** via a `CO2` detector: 
+![air quality](https://github.com/follen99/SmartCity/blob/main/Screenshots/airQuality.png)
