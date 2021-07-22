@@ -52,3 +52,7 @@ We instead simply print to a console the **log** in a **json** form:
 
 We can see how the **log** will be writed: 
 ![enter image description here](https://github.com/follen99/SmartCity/blob/main/Screenshots/log_example.png)
+
+---
+
+Logs are a very powerful **tool**, in this case we have a simple scenario, but we could use them to know when a road is busiest, and act accordingly.
