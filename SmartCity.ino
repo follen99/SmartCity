@@ -8,11 +8,28 @@ int BLUE_LED = 5;
 int YELLOW_LED = 6;
 int RED_LED = 7;
 
+//#################### STATS VARIABLES #############
+int hours = 0;
+int minutes = 0;
+int seconds = 0;
+
+int previousSeconds = 0;
+int previousMinutes = 0;
+int previousHours = 0;
 
 
 
 void setup(){
   Serial.begin(9600);
+  
+  //initializing time
+  hours = getHours();
+  minutes = getMinutes();
+  seconds = getSeconds();
+  
+  previousHours = hours;
+  previousMinutes = minutes;
+  previousSeconds = seconds;
 }
 
 void loop()
@@ -25,9 +42,10 @@ void loop()
   checkGas(gas);
   
   
-  Serial.println(getMinutes());
   
+  checkTime();
   
+  Serial.println(seconds);
   delay(250);
   
 }
@@ -76,6 +94,47 @@ int getSeconds(){
   return hours.toInt();
 }
 
+void checkTime(){
+  int localSeconds = millis()/1000 ;
+  int localMinutes = ( millis()/1000 ) / 60;
+  int localHours = ( ( millis()/1000 ) / 60 ) / 60;
+  
+  if(previousSeconds != localSeconds){
+    previousSeconds = localSeconds;
+  	seconds+=1;
+    if(seconds >= 60){
+    	seconds = 0;
+    }
+  }
+  
+  if(previousMinutes != localMinutes){
+    previousMinutes = localMinutes;
+  	minutes+=1;
+    if(minutes >= 60){
+    	minutes = 0;
+    }
+  }
+  
+  if(previousHours != localHours){
+    previousHours = localHours;
+  	hours+=1;
+    if(hours == 24){
+    	hours = 0;
+    }
+  }
+  
+  
+}
+
+/**
+* This method should write to an SD card,
+* but TinkerCad does not have such module.
+* Instead i just print to screen the log.
+*/
+String writeLog(){
+  int seconds = millis()/1000;
+  Serial.println(seconds);
+}
 
 
 
