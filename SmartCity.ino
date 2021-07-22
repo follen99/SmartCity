@@ -10,8 +10,8 @@ int RED_LED = 7;
 
 //#################### STATS VARIABLES #############
 long passedCars = 0;
-
-
+long lastLog = millis();
+long LOG_INTERVAL = 2000;
 
 
 void setup(){
@@ -59,8 +59,13 @@ void checkCarPass(){
   		it means that a car has passed.
   */
   if(carSensor > 0){
-    passedCars +=1;
-  	writeLog("A car passed");
+    if(millis() - lastLog > LOG_INTERVAL){
+  		lastLog = millis();
+      
+        passedCars +=1;
+      	writeLog("A car passed");
+    }
+    
   }
 }
 
@@ -75,16 +80,36 @@ void checkCarPass(){
 * Instead i just print to screen the log.
 */
 String writeLog(String action){
+  
+    
   Serial.print("{");
+  
+  //the timestamp of the event
   Serial.print("\"Timestamp\" : \"");
   Serial.print(millis());
+  
+  //the action that triggered the log
   Serial.print("\"; \"Action\" : \"");
   Serial.print(action);
   
+  //the amount of cars that passed till this moment
+  Serial.print("\"; \"passedCars\" : \"");
+  Serial.print(passedCars);
   
+  //the air quality at this point in time
+  Serial.print("\"; \"airQuality\" : \"");
+  Serial.print(getAirQuality());
+  Serial.print("%");
+
+
   Serial.println("\"}");
+  
 }
 
+int getAirQuality(){
+  int gas = analogRead(gasSensorPin);
+  return map(gas, 300, 750, 0, 100);
+}
 
 
 
