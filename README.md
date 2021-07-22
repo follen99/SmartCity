@@ -13,5 +13,31 @@ A way to achieve that is by monitoring the `CO2` in the air and using `using les
 A really important factor is to `understand` **when** and **why** some levels are too high, so a method to fix too high `CO2` values is by **logging** whenever there is an event, to **analyze** the data later.
 
 ## The Code
+
+### Air Control
 We can **monitor** the **air quality** via a `CO2` detector: 
+
+![circuit](https://github.com/follen99/SmartCity/blob/main/Screenshots/airQualityCircuit.png)
+And we can control it via the code:
+
 ![air quality](https://github.com/follen99/SmartCity/blob/main/Screenshots/airQuality.png)
+
+Of course, we need a way to interface with the circuit: 
+
+![interface](https://github.com/follen99/SmartCity/blob/main/Screenshots/airQualityInterface.png)
+
+When the air gets gradually worse, a bunch of `LEDs` gradually turns on;
+on the last stage, when the air is not safe, a `PIEZO` starts beeping, acting as an alarm.
+
+---
+
+### Turning off lights when we do not need them
+We could use a circuit to turn off road lights when there is no one near by, to **save electricity**.
+This goal is achieved by using an **array** of standalone sensors: 
+![array](https://github.com/follen99/SmartCity/blob/main/Screenshots/CarDetectorCircuit.png)
+
+Every **sensor** is **powered** by a `Solar Cell`, to save even more power.
+Anyway,  the first **sensor** is connected to the `Controller` (arduino) to know when a car passes by.
+We need this **feature** to **LOG** the event:
+
+![car pass](https://github.com/follen99/SmartCity/blob/main/Screenshots/carPass.png) 
