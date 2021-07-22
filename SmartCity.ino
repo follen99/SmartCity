@@ -19,21 +19,15 @@ int previousHours = 0;
 
 
 
+
 void setup(){
   Serial.begin(9600);
-  
-  //initializing time
-  hours = getHours();
-  minutes = getMinutes();
-  seconds = getSeconds();
-  
-  previousHours = hours;
-  previousMinutes = minutes;
-  previousSeconds = seconds;
 }
 
 void loop()
 {
+  
+  
   int gas = analogRead(gasSensorPin);
   
   gas = map(gas, 300, 750, 0, 100);
@@ -43,9 +37,8 @@ void loop()
   
   
   
-  checkTime();
   
-  Serial.println(seconds);
+  writeLog("test");
   delay(250);
   
 }
@@ -78,21 +71,7 @@ void checkCarPass(){
 
 
 
-//########################## UTILS ##########################
-int getHours(){
-  String hours = hours + __TIME__[0] + __TIME__[1];
-  return hours.toInt();
-}
-
-int getMinutes(){
-  String hours = hours + __TIME__[3] + __TIME__[4];
-  return hours.toInt();
-}
-
-int getSeconds(){
-  String hours = hours + __TIME__[6] + __TIME__[7];
-  return hours.toInt();
-}
+//########################## UTILS #########################
 
 void checkTime(){
   int localSeconds = millis()/1000 ;
@@ -122,18 +101,30 @@ void checkTime(){
     	hours = 0;
     }
   }
-  
-  
 }
+
+void printTime(){
+  Serial.print(hours);
+  Serial.print(":");
+  Serial.print(minutes);
+  Serial.print(":");
+  Serial.print(seconds);
+}
+
 
 /**
 * This method should write to an SD card,
 * but TinkerCad does not have such module.
 * Instead i just print to screen the log.
 */
-String writeLog(){
-  int seconds = millis()/1000;
-  Serial.println(seconds);
+String writeLog(String action){
+  Serial.print("{");
+  Serial.print("\"Timestamp\" : \"");
+  Serial.print(millis());
+  Serial.print("\"; \"Action\" : \"");
+  Serial.print(action);
+  
+  Serial.println("\"");
 }
 
 
