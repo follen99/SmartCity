@@ -16,12 +16,22 @@ long passedCars = 0;
 long lastLog = millis();
 long LOG_INTERVAL = 2000;
 
-//temperature
-int 
+long hourMillis = 3600000;
+long lastHourMillis = 0;
+long lastHourPassedCars = 0;
+
+long maximumCarsPerHour = 5;
+
+//stoplight
+int redLight = 10;
+int greenLight = 9;
 
 
 void setup(){
   Serial.begin(9600);
+  lastHourMillis = millis();
+  
+  initLeds();	//init stoplightLeds
 }
 
 void loop()
@@ -63,10 +73,27 @@ void checkCarPass(){
   */
   if(carSensor > 0){
     if(millis() - lastLog > LOG_INTERVAL){
-  		lastLog = millis();
+
+      if(millis() - lastHourMillis < hourMillis){
+        lastHourPassedCars +=1;		//adding a car
+
+        if(lastHourPassedCars > maximumCarsPerHour){
+          //block the lane
+          digitalWrite(redLight, HIGH);
+          digitalWrite(greenLight, LOW);
+        }else{
+          initLeds();
+        }
+      }else{
+        lastHourMillis = millis();
+        lastHourPassedCars = 0;
+        initLeds();
+      }
       
-        passedCars +=1;
-      	writeLog("A car passed");
+      lastLog = millis();
+      
+      passedCars +=1;
+      writeLog("A car passed");
     }
     
   }
@@ -99,6 +126,10 @@ String writeLog(String action){
   Serial.print("\"; \"passedCars\" : \"");
   Serial.print(passedCars);
   
+  //the amount of cars that passed in the last hour
+  Serial.print("\"; \"passedCarsLastHour\" : \"");
+  Serial.print(lastHourPassedCars);
+  
   //the air quality at this point in time
   Serial.print("\"; \"airQuality\" : \"");
   Serial.print(getAirQuality());
@@ -119,6 +150,11 @@ int getAirQuality(){
 
 int getTemperature(){
   return map(((analogRead(temperaturePin) - 20) * 3.04), 0, 1023, -40, 125);
+}
+
+void initLeds(){
+  digitalWrite(redLight, LOW);		//stoplight
+  digitalWrite(greenLight, HIGH);	//stoplight
 }
 
 
