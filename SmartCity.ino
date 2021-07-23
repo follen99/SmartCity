@@ -7,11 +7,17 @@ int GREEN_LED = 4;
 int BLUE_LED = 5;
 int YELLOW_LED = 6;
 int RED_LED = 7;
+int temperaturePin = A0;
 
 //#################### STATS VARIABLES #############
+
+//cars
 long passedCars = 0;
 long lastLog = millis();
 long LOG_INTERVAL = 2000;
+
+//temperature
+int 
 
 
 void setup(){
@@ -26,7 +32,7 @@ void loop()
   
   checkCarPass();
   
-  
+  Serial.println(getTemperature());
   
   delay(250);
   
@@ -49,6 +55,12 @@ void checkGas(){
 
 void checkCarPass(){
   int carSensor = analogRead(A2);
+  //Serial.print("Sensor: ");
+  //Serial.println(sensor);
+  
+  /** 	if the value is greater than 0
+  		it means that a car has passed.
+  */
   if(carSensor > 0){
     if(millis() - lastLog > LOG_INTERVAL){
   		lastLog = millis();
@@ -56,6 +68,7 @@ void checkCarPass(){
         passedCars +=1;
       	writeLog("A car passed");
     }
+    
   }
 }
 
@@ -91,6 +104,9 @@ String writeLog(String action){
   Serial.print(getAirQuality());
   Serial.print("%");
 
+  //the air temperature 
+  Serial.print("\"; \"airTemperature\" : \"");
+  Serial.print(getTemperature());
 
   Serial.println("\"}");
   
@@ -99,6 +115,10 @@ String writeLog(String action){
 int getAirQuality(){
   int gas = analogRead(gasSensorPin);
   return map(gas, 300, 750, 0, 100);
+}
+
+int getTemperature(){
+  return map(((analogRead(temperaturePin) - 20) * 3.04), 0, 1023, -40, 125);
 }
 
 
