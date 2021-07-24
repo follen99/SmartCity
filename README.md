@@ -3,6 +3,10 @@ This is the repo of `International Competition On Embedded Systems` workshop
 
 You can explore the circuit [HERE](https://www.tinkercad.com/things/gbxHq2Dtcys-copy-of-smart-city/editel?sharecode=mTXS8glbrD19aOvlUgvTBS_cZBWWGC0vdCaZVx69N-w)
 
+---
+### Certificate
+![certificate](https://github.com/follen99/SmartCity/blob/main/Screenshots/certificate.jpeg)
+
 ## What Are Smart Cities?
 A **smart city** is a place where traditional networks and services are made more **efficient** with the use of **digital solutions** for the benefit of its inhabitants and business.
 
