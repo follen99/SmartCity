@@ -57,7 +57,7 @@ We should save events (`logs`) to a **file** or a **database**,  but `TinkerCad`
 We instead simply print to a console the **log** in a **json** form:
 ![logs](https://github.com/follen99/SmartCity/blob/main/Screenshots/log.png)
 
-We can see how the **log** will be writed: 
+We can see how the **log** will be written: 
 ![enter image description here](https://github.com/follen99/SmartCity/blob/main/Screenshots/log_example.png)
 
 ---
